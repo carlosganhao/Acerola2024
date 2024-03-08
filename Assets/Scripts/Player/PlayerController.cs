@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private CameraController _cameraController;
-    [SerializeField] private GameObject _placeholder;
+    [SerializeField] private Transform _chaserTransform;
     [SerializeField] private LayerMask _hitscanLayers;
     [SerializeField] private int _maxHealth = 5;
     [SerializeField] private float _maxVelocity = 2;
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController _characterController;
     private float _currentRotationAdjust;
     private float _currentRotationVelocity;
+    private bool isControllingChaser = true;
 
     void Awake()
     {
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
         _controls.PlayerActions.Enable();
 
         _controls.PlayerActions.Shoot.performed += Shoot;
+        EventBroker.DetachChaser += DetachChaser;
     }
 
     // Update is called once per frame
@@ -61,5 +63,10 @@ public class PlayerController : MonoBehaviour
             "LegCollider" => 2,
             _ => 1,
         };
+    }
+
+    private void DetachChaser()
+    {
+        
     }
 }
