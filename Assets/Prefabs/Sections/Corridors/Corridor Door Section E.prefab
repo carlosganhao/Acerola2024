@@ -101,7 +101,7 @@ PrefabInstance:
     - target: {fileID: 8306962771534387123, guid: b1e3f78ef5923d64bb772e8bd7fffecc,
         type: 3}
       propertyPath: m_Name
-      value: Corridor Door Section E Variant
+      value: Corridor Door Section E
       objectReference: {fileID: 0}
     - target: {fileID: 8693878991208284839, guid: b1e3f78ef5923d64bb772e8bd7fffecc,
         type: 3}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4192521442505932782}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: L Section NE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ Transform:
   - {fileID: 8969468920477626605}
   - {fileID: 3972047920263318709}
   - {fileID: 8912828573394268805}
-  - {fileID: 1338612025499196273}
+  - {fileID: 4980896955234973757}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -44,6 +44,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4192521442505932782}
     m_Modifications:
+    - target: {fileID: 1540431743191529351, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4384828865085243280, guid: 350a5a9c80779ca46b4fd728348dfd51,
         type: 3}
       propertyPath: m_RootOrder
@@ -103,6 +108,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall Trim (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4705266081758661337, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585257475210460669, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -178,10 +193,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6467867941376742429, guid: 8c09981f6c8dd20499fb000e8eb7ba47,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7250070255697685906, guid: 8c09981f6c8dd20499fb000e8eb7ba47,
         type: 3}
       propertyPath: m_Name
       value: Wall Corner
+      objectReference: {fileID: 0}
+    - target: {fileID: 7250070255697685906, guid: 8c09981f6c8dd20499fb000e8eb7ba47,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -202,6 +227,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4192521442505932782}
     m_Modifications:
+    - target: {fileID: 1540431743191529351, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4384828865085243280, guid: 350a5a9c80779ca46b4fd728348dfd51,
         type: 3}
       propertyPath: m_RootOrder
@@ -262,6 +292,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall Trim
       objectReference: {fileID: 0}
+    - target: {fileID: 4705266081758661337, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585257475210460669, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -281,10 +321,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4192521442505932782}
     m_Modifications:
+    - target: {fileID: 1495946476116797498, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2596750343823788865, guid: bba0e59d215c5c748be7d03e03a0000c,
         type: 3}
       propertyPath: m_Name
       value: Waypoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596750343823788865, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5891880387211591115, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6257980055019427688, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7266209404373712172, guid: bba0e59d215c5c748be7d03e03a0000c,
         type: 3}
@@ -340,6 +400,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414504073135498437, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -365,6 +430,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wood Floor
       objectReference: {fileID: 0}
+    - target: {fileID: 3611007099471139076, guid: 047cb0fc30bff604f87ec021e2442552,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4131788224220908478, guid: 047cb0fc30bff604f87ec021e2442552,
         type: 3}
       propertyPath: m_RootOrder
@@ -420,12 +490,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5733386011984488925, guid: 047cb0fc30bff604f87ec021e2442552,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 047cb0fc30bff604f87ec021e2442552, type: 3}
---- !u!4 &1338612025499196273 stripped
+--- !u!4 &4980896955234973757 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4131788224220908478, guid: 047cb0fc30bff604f87ec021e2442552,
     type: 3}

@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] private GameObject _reticle;
     [SerializeField] private float normalFOV = 60;
     [SerializeField] private float aimFOV = 25;
     [SerializeField] private float _verticalMouseSensitivity = 0.1f;
@@ -19,6 +20,7 @@ public class CameraController : MonoBehaviour
     private float _currentFOVTarget;
     private float _currentFOVAdjust;
     private float _currentFOVVelocity;
+    private bool isControllingChaser = true;
 
     void Awake()
     {
@@ -31,6 +33,13 @@ public class CameraController : MonoBehaviour
     {
         _controls.PlayerActions.Enable();
         _currentRotation = transform.localEulerAngles.x;
+
+        EventBroker.DetachChaser += DetachChaser;
+    }
+
+    void OnDestroy()
+    {
+        EventBroker.DetachChaser -= DetachChaser;
     }
 
     // Update is called once per frame
@@ -42,16 +51,24 @@ public class CameraController : MonoBehaviour
         _currentRotation = Mathf.Clamp(_currentRotation, _maxLookAngle.x, _maxLookAngle.y);
         transform.rotation = Quaternion.Euler(_currentRotation, transform.eulerAngles.y, transform.eulerAngles.z);
 
-        if(_controls.PlayerActions.Aim.IsPressed())
+        if(isControllingChaser && _controls.PlayerActions.Aim.IsPressed())
         {
             _currentFOVTarget = aimFOV;
+            _reticle.SetActive(true);
         }
         else
         {
             _currentFOVTarget = normalFOV;
+            _reticle.SetActive(false);
         }
 
         _currentFOVAdjust = Mathf.SmoothDamp(_currentFOVAdjust, _currentFOVTarget, ref _currentFOVVelocity, _zoomDamp);
         _camera.fieldOfView = _currentFOVAdjust;
+    }
+
+    private void DetachChaser()
+    {
+        isControllingChaser = false;
+        _rotationDamp = 0;
     }
 }

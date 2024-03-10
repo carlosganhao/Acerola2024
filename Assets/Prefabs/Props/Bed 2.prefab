@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7175031075166626365}
   - component: {fileID: 3258108718300968151}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bed 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 3395767645471167548}
   - component: {fileID: 2990616142857981148}
   - component: {fileID: 9029863121537526575}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 4717888339176515214}
   - component: {fileID: 2788204737625845991}
   - component: {fileID: 651305859223700380}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 2992232968228236222}
   - component: {fileID: 2387843767885717091}
   - component: {fileID: 970618414136765277}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

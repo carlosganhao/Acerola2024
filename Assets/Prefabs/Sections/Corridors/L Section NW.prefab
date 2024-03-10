@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 2483019330072573911, guid: 963e03168765b8e468170cbbe33dcbf2,
         type: 3}
       propertyPath: m_Name
-      value: L Section NW Variant
+      value: L Section NW
       objectReference: {fileID: 0}
     - target: {fileID: 3972047920263318709, guid: 963e03168765b8e468170cbbe33dcbf2,
         type: 3}

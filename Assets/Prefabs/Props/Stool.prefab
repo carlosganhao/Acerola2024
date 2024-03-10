@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9089586568038915012}
   - component: {fileID: 633457013182162203}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Stool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 2618153649524540847}
   - component: {fileID: 4443730426307498049}
   - component: {fileID: 7056242917236570747}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

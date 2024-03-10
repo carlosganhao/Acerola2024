@@ -86,7 +86,7 @@ PrefabInstance:
     - target: {fileID: 1610118851463901092, guid: f468a35014998cb47a05fc68d19c3b9e,
         type: 3}
       propertyPath: m_Name
-      value: T Section S Variant
+      value: T Section S
       objectReference: {fileID: 0}
     - target: {fileID: 2344176234140982920, guid: f468a35014998cb47a05fc68d19c3b9e,
         type: 3}

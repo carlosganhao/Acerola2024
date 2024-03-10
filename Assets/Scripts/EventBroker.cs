@@ -21,5 +21,29 @@ public static class EventBroker
         if (DetachChaser != null)
             DetachChaser();
     }
+
+    public static event Action<int> PlayerHealthChanged;
+    
+    public static void InvokePlayerHealthChanged(int healthChange)
+    {
+        if (PlayerHealthChanged != null)
+            PlayerHealthChanged(healthChange);
+    }
+
+    public static event Action<int> QuestStepActivated;
+
+    public static void InvokeQuestStepActivated(int step)
+    {
+        if (QuestStepActivated != null)
+            QuestStepActivated(step);
+    }
+
+    public static event Action<int> QuestStepFulfilled;
+
+    public static void InvokeQuestStepFulfilled(int step)
+    {
+        if (QuestStepFulfilled != null)
+            QuestStepFulfilled(step);
+    }
     #endregion
 }

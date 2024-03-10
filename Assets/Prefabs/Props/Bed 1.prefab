@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4512403925004489517}
   - component: {fileID: 8807247263165989863}
   - component: {fileID: 6579592025252746178}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6759861145652011538}
   - component: {fileID: 4955458939525965399}
   - component: {fileID: 7000281268546957146}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5808855308259497846}
   - component: {fileID: 6551618862042635288}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bed 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 3938136831479228863}
   - component: {fileID: 6463884100480763684}
   - component: {fileID: 6233283160916556674}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

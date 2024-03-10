@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8771171603429440326}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Corridor Section NS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,6 +42,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8771171603429440326}
     m_Modifications:
+    - target: {fileID: 1540431743191529351, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4384828865085243280, guid: 350a5a9c80779ca46b4fd728348dfd51,
         type: 3}
       propertyPath: m_RootOrder
@@ -102,6 +107,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall Trim
       objectReference: {fileID: 0}
+    - target: {fileID: 4705266081758661337, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585257475210460669, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -121,6 +136,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8771171603429440326}
     m_Modifications:
+    - target: {fileID: 1540431743191529351, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4384828865085243280, guid: 350a5a9c80779ca46b4fd728348dfd51,
         type: 3}
       propertyPath: m_RootOrder
@@ -181,6 +201,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall Trim (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4705266081758661337, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585257475210460669, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -204,6 +234,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wood Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3611007099471139076, guid: 047cb0fc30bff604f87ec021e2442552,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4131788224220908478, guid: 047cb0fc30bff604f87ec021e2442552,
         type: 3}
@@ -259,6 +294,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733386011984488925, guid: 047cb0fc30bff604f87ec021e2442552,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

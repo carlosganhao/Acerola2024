@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 
 public class Waypoint : MonoBehaviour
 {
     public Vector3 Position { get => transform.position; }
     public Waypoint[] ConnectedWaypoits = new Waypoint[4];
+    public Collider[] ScanAread = new Collider[4];
+    public UnityEvent[] InteractEvents = new UnityEvent[4];
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +51,21 @@ public class Waypoint : MonoBehaviour
         Orientation.West => Vector3.left,
         _ => Vector3.zero,
     };
+
+    public int CheckDirectionToWaypoint(Waypoint waypoint)
+    {
+        if(waypoint is null) return -1;
+
+        for (int i = 0; i < ConnectedWaypoits.Length; i++)
+        {
+            if(ConnectedWaypoits[i] is not null && waypoint.Position == ConnectedWaypoits[i].Position)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 
     void OnDrawGizmos()
     {

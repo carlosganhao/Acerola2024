@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3668679166967726313}
   - component: {fileID: 956906648407667719}
   - component: {fileID: 458800805267316991}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 521538338470749250}
   - component: {fileID: 4191821664426863839}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}

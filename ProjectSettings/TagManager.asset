@@ -13,9 +13,9 @@ TagManager:
   - UI
   - Player
   - Zombie
-  - 
-  - 
-  - 
+  - Waypoint
+  - Room
+  - Interactable
   - 
   - 
   - 

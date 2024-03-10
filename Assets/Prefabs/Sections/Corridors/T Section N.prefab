@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 242439024749819054}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: T Section N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 1183032722379506843}
   - {fileID: 2344176234140982920}
-  - {fileID: 7989264354259466658}
+  - {fileID: 2082681981451115715}
   - {fileID: 677212455158545486}
   - {fileID: 5955252239158197952}
   m_Father: {fileID: 0}
@@ -44,6 +44,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 242439024749819054}
     m_Modifications:
+    - target: {fileID: 1540431743191529351, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4384828865085243280, guid: 350a5a9c80779ca46b4fd728348dfd51,
         type: 3}
       propertyPath: m_RootOrder
@@ -104,6 +109,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall Trim
       objectReference: {fileID: 0}
+    - target: {fileID: 4705266081758661337, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585257475210460669, guid: 350a5a9c80779ca46b4fd728348dfd51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -127,6 +142,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wood Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3611007099471139076, guid: 047cb0fc30bff604f87ec021e2442552,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4131788224220908478, guid: 047cb0fc30bff604f87ec021e2442552,
         type: 3}
@@ -183,6 +203,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5733386011984488925, guid: 047cb0fc30bff604f87ec021e2442552,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -202,10 +227,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 242439024749819054}
     m_Modifications:
+    - target: {fileID: 1040589423510530482, guid: fcf302f556aca8f43957174bebb4f275,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3688445288890372157, guid: fcf302f556aca8f43957174bebb4f275,
         type: 3}
       propertyPath: m_Name
       value: Wall Corner Trim
+      objectReference: {fileID: 0}
+    - target: {fileID: 3688445288890372157, guid: fcf302f556aca8f43957174bebb4f275,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862204050943760998, guid: fcf302f556aca8f43957174bebb4f275,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8254452542499018938, guid: fcf302f556aca8f43957174bebb4f275,
         type: 3}
@@ -267,7 +307,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcf302f556aca8f43957174bebb4f275, type: 3}
---- !u!4 &7989264354259466658 stripped
+--- !u!4 &2082681981451115715 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8254452542499018938, guid: fcf302f556aca8f43957174bebb4f275,
     type: 3}
@@ -281,10 +321,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 242439024749819054}
     m_Modifications:
+    - target: {fileID: 1495946476116797498, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2596750343823788865, guid: bba0e59d215c5c748be7d03e03a0000c,
         type: 3}
       propertyPath: m_Name
       value: Waypoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596750343823788865, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5891880387211591115, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6257980055019427688, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7266209404373712172, guid: bba0e59d215c5c748be7d03e03a0000c,
         type: 3}
@@ -341,6 +401,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7414504073135498437, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -360,10 +425,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 242439024749819054}
     m_Modifications:
+    - target: {fileID: 1040589423510530482, guid: fcf302f556aca8f43957174bebb4f275,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3688445288890372157, guid: fcf302f556aca8f43957174bebb4f275,
         type: 3}
       propertyPath: m_Name
       value: Wall Corner Trim (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3688445288890372157, guid: fcf302f556aca8f43957174bebb4f275,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862204050943760998, guid: fcf302f556aca8f43957174bebb4f275,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8254452542499018938, guid: fcf302f556aca8f43957174bebb4f275,
         type: 3}

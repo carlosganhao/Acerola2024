@@ -41,7 +41,7 @@ PrefabInstance:
     - target: {fileID: 6949156478689780071, guid: 1e694dc6c03710b4da03d3bdd9b1de65,
         type: 3}
       propertyPath: m_Name
-      value: Corridor Section EW Variant
+      value: Corridor Section EW
       objectReference: {fileID: 0}
     - target: {fileID: 8771171603429440326, guid: 1e694dc6c03710b4da03d3bdd9b1de65,
         type: 3}

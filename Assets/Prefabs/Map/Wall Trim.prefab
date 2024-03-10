@@ -94,7 +94,7 @@ PrefabInstance:
     - target: {fileID: 4277585480836489093, guid: 1156593a2f4fab347a9aaeedcfc37267,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4277585480836489093, guid: 1156593a2f4fab347a9aaeedcfc37267,
         type: 3}
@@ -150,6 +150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall Trim
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067142760539964943, guid: 1156593a2f4fab347a9aaeedcfc37267,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

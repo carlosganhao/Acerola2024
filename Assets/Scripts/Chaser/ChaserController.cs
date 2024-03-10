@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class ChaserController : MonoBehaviour
 {
+    public GameObject _placeholder;
     [HideInInspector] public ControlledChaserState ControlledState;
     [HideInInspector] public PatrolingChaserState PatrolingState;
     [HideInInspector] public ChasingChaserState ChasingState;
     [HideInInspector] public CharacterController _characterController;
+    public Animator _animator;
+    [HideInInspector] public BaseControls _controls;
+    public AnimationCurve _distanceToPlayerOdds;
     private AbstractChaserState _currentState = null;
     private AbstractChaserState _previousState;
 
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        
+        _controls = new BaseControls();
 
         ControlledState = new ControlledChaserState(this);
         PatrolingState = new PatrolingChaserState(this);

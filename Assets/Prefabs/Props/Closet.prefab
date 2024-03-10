@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6533414002443504393}
   - component: {fileID: 8805843064998557492}
   - component: {fileID: 6639963151745888878}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,6 +83,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2352051885773870507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1678677591148124825}
+  m_Layer: 3
+  m_Name: HidePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1678677591148124825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2352051885773870507}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4099039540328698494}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4464911687865538514
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 71723952992863554}
   - component: {fileID: 6872342366401956821}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Closet Door Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +179,7 @@ GameObject:
   - component: {fileID: 9144279428035144904}
   - component: {fileID: 2021091361080111000}
   - component: {fileID: 7960586120955566827}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +262,8 @@ GameObject:
   - component: {fileID: 8316983690703559177}
   - component: {fileID: 3571020704881318649}
   - component: {fileID: 4451146983596003621}
-  m_Layer: 0
+  - component: {fileID: 3555538269857912287}
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,6 +335,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3555538269857912287
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7506813223808440750}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.01, y: 2.827987, z: 0.86749923}
+  m_Center: {x: 0, y: 1.4413203, z: -0.036250412}
 --- !u!1 &7733591149915804530
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3753067118767308397}
   - component: {fileID: 5086145946908630916}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Closet Door Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +420,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4099039540328698494}
   - component: {fileID: 5934425514873256864}
-  m_Layer: 0
+  - component: {fileID: 824470570360956795}
+  m_Layer: 10
   m_Name: Closet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,6 +443,7 @@ Transform:
   - {fileID: 8316983690703559177}
   - {fileID: 3753067118767308397}
   - {fileID: 71723952992863554}
+  - {fileID: 1678677591148124825}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -413,3 +468,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.01, y: 2.827987, z: 0.86749923}
   m_Center: {x: 0, y: 1.4413203, z: -0.036250412}
+--- !u!114 &824470570360956795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8106837419692803752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a63c725c0343104bb1abbec9b81e412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hidePosition: {fileID: 1678677591148124825}

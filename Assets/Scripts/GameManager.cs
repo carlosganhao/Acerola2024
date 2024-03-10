@@ -5,10 +5,14 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject _zombieContainer;
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
+        EventBroker.DetachChaser += DetachChaser;
     }
 
     // Update is called once per frame
@@ -21,5 +25,10 @@ public class GameManager : MonoBehaviour
             EventBroker.InvokeDetachChaser();
         }
         #endif
+    }
+
+    private void DetachChaser()
+    {
+        Destroy(_zombieContainer);
     }
 }

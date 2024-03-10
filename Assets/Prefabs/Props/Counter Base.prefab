@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6661304674655466354}
   - component: {fileID: 5433295969666603307}
   - component: {fileID: 6479127332159301554}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8534310177024666112}
   - component: {fileID: 1832710934579548126}
   - component: {fileID: 789150806665325765}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1509616928845257691}
   - component: {fileID: 371935446817836337}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Counter Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
