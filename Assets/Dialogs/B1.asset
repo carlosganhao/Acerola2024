@@ -1,0 +1,198 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66aceeed3cae9034ebab8fdac789b6c0, type: 3}
+  m_Name: B1
+  m_EditorClassIdentifier: 
+  Dialog:
+  - LeftParticipantName: 
+    RightParticipantName: Wounded Woman
+    Text: Thank you! Feeling much better, I just need one more thing. I need some
+      bandages. The wound is mostly closed but it is still bleeding, could you go
+      back to the bathroom and get some please?
+    WaitTime: 10000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - LeftParticipantName: 
+    RightParticipantName: 
+    Text: You know I was ambushed my crazy men every single time I went to get something
+      to help you out
+    WaitTime: 5000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - LeftParticipantName: 
+    RightParticipantName: 
+    Text: Maybe you are with them! Maybe you are trying to set me up!
+    WaitTime: 5000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - LeftParticipantName: 
+    RightParticipantName: Wounded Woman
+    Text: Im not! I swear!
+    WaitTime: 3000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 7e11f43868f53464f972fa990328a0cc, type: 2}
+          m_TargetAssemblyTypeName: SwitchFollowGroupEventAsset, Assembly-CSharp
+          m_MethodName: SwitchFollowGroupEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - LeftParticipantName: 
+    RightParticipantName: 
+    Text: I dont trust you, I'll just shoot you and stop whatever is going on in
+      this place
+    WaitTime: 5000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 3c437d280c73efe4583566d5baa36578, type: 2}
+          m_TargetAssemblyTypeName: SwitchTargetGroupEventAsset, Assembly-CSharp
+          m_MethodName: SwitchTargetGroupEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: ce7e398b8a0b3434d913a00935f4df5f, type: 2}
+          m_TargetAssemblyTypeName: CharacterLookAtCameraEventAsset, Assembly-CSharp
+          m_MethodName: CharacterLookAtCameraEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - LeftParticipantName: Player Character
+    RightParticipantName: 
+    Text: Dont shoot her! She is injured!
+    WaitTime: 3000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 669b377e3f228564999be8ce998c6e51, type: 2}
+          m_TargetAssemblyTypeName: ShowMouseEventAsset, Assembly-CSharp
+          m_MethodName: ShowMouseEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - LeftParticipantName: 
+    RightParticipantName: 
+    Text: I told you to shoot her! Why are you not obeying?
+    WaitTime: 3000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 310486785beef5f41b4b1c3f35eab0d4, type: 2}
+          m_TargetAssemblyTypeName: CharacterAimEventAsset, Assembly-CSharp
+          m_MethodName: CharacterAimEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - LeftParticipantName: Player Character
+    RightParticipantName: 
+    Text: I'm done following you orders! You made me kill so many people, probably
+      half of them weren't even bad! You are the bad guy, and I'll stop you!
+    WaitTime: 3000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ac59e259a894a654c97f317439c27297, type: 2}
+          m_TargetAssemblyTypeName: CharacterShootEventAsset, Assembly-CSharp
+          m_MethodName: CharacterShootEvent
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: 6b55c9f6787e3fd46bcc5b099e735f89, type: 2}
+          m_TargetAssemblyTypeName: BlowUpMouseEventAsset, Assembly-CSharp
+          m_MethodName: BlowUpMouseEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - LeftParticipantName: 
+    RightParticipantName: 
+    Text: 
+    WaitTime: 2000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - LeftParticipantName: Player Character
+    RightParticipantName: 
+    Text: Now that I'm free, Ill stop you from murdering anyone else!
+    WaitTime: 4000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ac59e259a894a654c97f317439c27297, type: 2}
+          m_TargetAssemblyTypeName: CharacterShootEventAsset, Assembly-CSharp
+          m_MethodName: CharacterShootEvent
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: 4fdc2d3a3cbe48f41b408fe0480b8c3e, type: 2}
+          m_TargetAssemblyTypeName: RunAwayPlayerEventAsset, Assembly-CSharp
+          m_MethodName: RunAwayPlayerEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2

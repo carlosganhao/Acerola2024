@@ -6,11 +6,12 @@ public class ChasingChaserState : AbstractChaserState
 {
     private float _shotCooldown = 1.0f;
     private float _shotTimeElapsed;
-    private float _accuracy = 10;
-    private float _chasingSpeed = 3;
+    private float _accuracy = 4;
+    private float _chasingSpeed = 5;
     private Vector3 _playersPosition;
     private float _approachedDistance = 0.5f;
     private Stack<Waypoint> _pathToPlayer;
+    private Waypoint _previousTargetWaypoint;
     private Waypoint _targetWaypoint;
 
     public ChasingChaserState(ChaserController controller) : base(controller)
@@ -20,15 +21,33 @@ public class ChasingChaserState : AbstractChaserState
 
     public override void EnterState()
     {
-        controller._animator.SetBool("Moving", false);
-        controller._animator.SetBool("Aiming", true);
-        Debug.Log("Found Player!");
+        if(controller._soundPosition != Vector3.zero)
+        {
+            GetPathTo(controller._soundPosition);
+            GetNextTargetWaypoint();
+            controller._soundPosition = Vector3.zero;
+
+            controller._animator.SetBool("Moving", true);
+            controller._animator.SetBool("Running", true);
+            controller._animator.SetBool("Aiming", false);
+        }
+        else
+        {
+            controller._animator.SetBool("Moving", false);
+            controller._animator.SetBool("Running", false);
+            controller._animator.SetBool("Aiming", true);
+        }
+        // Debug.Log("Found Player!");
     }
 
     public override void UpdateState()
     {
-        if(MapController.Instance.IsPlayerVisible(controller.transform.position))
+        if(MapController.Instance.IsPlayerVisible(controller.transform.position, controller.transform.forward))
         {
+            controller._animator.SetBool("Moving", false);
+            controller._animator.SetBool("Running", false);
+            controller._animator.SetBool("Aiming", true);
+
             _pathToPlayer = null;
             _playersPosition = MapController.Instance.PlayerPosition;
             LookAtPlayer();
@@ -45,9 +64,13 @@ public class ChasingChaserState : AbstractChaserState
         }
         else
         {
+            controller._animator.SetBool("Moving", true);
+            controller._animator.SetBool("Running", true);
+            controller._animator.SetBool("Aiming", false);
+
             if(_pathToPlayer is null)
             {
-                GetPathToPlayer();
+                GetPathTo(_playersPosition);
                 GetNextTargetWaypoint();
             }
             else
@@ -93,7 +116,7 @@ public class ChasingChaserState : AbstractChaserState
 
         Vector3 shotDirection = Quaternion.AngleAxis(Random.Range(-_accuracy, _accuracy), Vector3.up) * (Quaternion.AngleAxis(Random.Range(-_accuracy, _accuracy), controller.transform.right) * playerDirection);
 
-        if(Physics.Raycast(controller.transform.position, shotDirection, out RaycastHit hit, 100))
+        if(Physics.Raycast(controller.transform.position, shotDirection, out RaycastHit hit, 100, LayerMask.GetMask("Player", "Terrain")))
         {
             if(hit.collider.tag == "Player")
             {
@@ -101,15 +124,15 @@ public class ChasingChaserState : AbstractChaserState
             }
             else
             {
-                // GameObject.Instantiate(controller._placeholder, hit.point, Quaternion.identity);
+                GameObject.Instantiate(controller._shotParticleSystem, hit.point, controller.transform.rotation);
             }
         }
     }
 
-    private void GetPathToPlayer()
+    private void GetPathTo(Vector3 position)
     {
-        var lastWaypoint = MapController.Instance.GetClosestWaypointToPoint(_playersPosition);
-        var firstWaypoint = MapController.Instance.GetClosestWaypointToPointFromOther(_playersPosition, controller.transform.position);
+        var lastWaypoint = MapController.Instance.GetClosestWaypointToPoint(position);
+        var firstWaypoint = MapController.Instance.GetClosestWaypointToPointFromOther(position, controller.transform.position);
 
         _pathToPlayer = MapController.Instance.GetPathToDestination(lastWaypoint, firstWaypoint);
     }
@@ -118,12 +141,24 @@ public class ChasingChaserState : AbstractChaserState
     {
         if(_pathToPlayer.Count > 0)
         {
+            _previousTargetWaypoint = _targetWaypoint;
             _targetWaypoint = _pathToPlayer.Pop();
             LookAtWaypoint(); 
+            UseAction(_previousTargetWaypoint, _previousTargetWaypoint.CheckDirectionToWaypoint(_targetWaypoint));
         }
         else
         {
             controller.SwitchToState(controller.PatrolingState);
+        }
+    }
+
+    private void UseAction(Waypoint waypoint, int direction)
+    {
+        // Debug.Log($"Direction: {direction}");
+        if(direction >= 0 && direction < 4)
+        {
+            // Debug.Log($"Trying to use action {direction} of {waypoint}");
+            waypoint.InteractEvents[direction].Invoke();
         }
     }
 }

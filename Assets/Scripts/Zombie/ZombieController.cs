@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class ZombieController : MonoBehaviour, IDamageable
 {
@@ -10,19 +11,24 @@ public class ZombieController : MonoBehaviour, IDamageable
     // [SerializeField] private LayerMask _detenctionLayerMask;
     [SerializeField] private int _maxHealth = 5;
     [SerializeField] private float _maxVelocity = 2;
+    [SerializeField] private float _attackCooldown = 1;
     private CharacterController _characterController;
+    private CinemachineImpulseSource _impulseSource;
+    private float _attackElapsedTime;
     private int _health;
     private Transform _currentTarget;
 
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         _health = _maxHealth;
+        _attackElapsedTime = _attackCooldown;
 
         _containingRoom.PlayerDetected += SetTarget;
     }
@@ -39,7 +45,21 @@ public class ZombieController : MonoBehaviour, IDamageable
         {
             _animator.SetBool("Walking", true);
             LookAtWaypoint();
+
+            var colliders = Physics.OverlapBox(transform.position + transform.forward * 0.25f, new Vector3(0.25f, 0.25f, 0.25f), transform.rotation);
+        
+            foreach (var collider in colliders)
+            {
+                if(collider.gameObject.layer == 6 && _attackElapsedTime < 0)
+                    {
+                        _impulseSource.GenerateImpulse(4);
+                        _animator.SetTrigger("Stab");
+                        _attackElapsedTime = _attackCooldown;
+                    }
+            }
         }
+
+        _attackElapsedTime -= Time.deltaTime;
     }
 
     void FixedUpdate()

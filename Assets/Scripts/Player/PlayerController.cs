@@ -2,34 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 
 public class PlayerController : MonoBehaviour
 {
     [HideInInspector] public HideProp PropHidingInsideOf;
     [SerializeField] private CameraController _cameraController;
+    [SerializeField] private CinemachineVirtualCamera _cinemachineCamera;
     [SerializeField] private Transform _chaserTransform;
     [SerializeField] private LayerMask _hitscanLayers;
-    [SerializeField] private int _maxHealth = 5;
+    [SerializeField] private GameObject _shotParticleSystem;
+    [SerializeField] private int _maxHealth = 3;
     [SerializeField] private float _maxVelocity = 2;
+    [SerializeField] private float _maxRunVelocity = 4;
     [SerializeField] private float _aimVelocity = 0.5f;
     [SerializeField] private float _velocityDamp = 0.2f;
     [SerializeField] private float _horizontalMouseSensitivity = 0.1f;
     [SerializeField] private float _rotationDamp = 0.2f;
+    private int _health;
     private BaseControls _controls; 
     private CharacterController _characterController;
+    private CinemachineBasicMultiChannelPerlin _cameraNoise;
     private float _currentRotationAdjust;
     private float _currentRotationVelocity;
     private float _targetVelocity;
     private float _currentVelocity;
     private float _currentVelocityChange;
-    private Vector3 previousToHidingPosition;
-    private bool isControllingChaser = true;
+    private Vector3 _previousToHidingPosition;
+    private bool _isControllingChaser = true;
+    public bool IsControllingChaser { get => _isControllingChaser; private set => _isControllingChaser = value; }
 
     void Awake()
     {
         _controls = new BaseControls();
         _characterController = GetComponent<CharacterController>();
+        _cameraNoise = _cinemachineCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
     
     // Start is called before the first frame update
@@ -37,11 +45,15 @@ public class PlayerController : MonoBehaviour
     {
         _controls.PlayerActions.Enable();
 
-        _currentVelocity = _maxVelocity;
+        _health = _maxHealth;
+        _currentVelocity = _maxVelocity; 
 
         _controls.PlayerActions.Shoot.performed += Shoot;
         _controls.PlayerActions.Interact.performed += Interact;
         EventBroker.DetachChaser += DetachChaser;
+        EventBroker.AnimationIn += AnimationIn;
+        EventBroker.AnimationOut += AnimationOut;
+        EventBroker.HidePlayerForCutscene += HidePlayerForCutscene;
     }
 
     // Update is called once per frame
@@ -51,9 +63,13 @@ public class PlayerController : MonoBehaviour
         _currentRotationAdjust = Mathf.SmoothDamp(_currentRotationAdjust, inputRotation, ref _currentRotationVelocity, _rotationDamp);
         transform.Rotate(Vector3.up, _currentRotationAdjust);
 
-        if(isControllingChaser && _controls.PlayerActions.Aim.IsPressed())
+        if(_isControllingChaser && _controls.PlayerActions.Aim.IsPressed())
         {
             _targetVelocity = _aimVelocity;
+        }
+        else if(_controls.PlayerActions.Run.IsPressed())
+        {
+            _targetVelocity = _maxRunVelocity;
         }
         else
         {
@@ -67,6 +83,16 @@ public class PlayerController : MonoBehaviour
             // Debug.Log($"Position: {transform.position}, CurrentVelocity: {_currentVelocity}");
 
             var inputMovement = _controls.PlayerActions.Movement.ReadValue<Vector2>();
+            
+            if(inputMovement != Vector2.zero)
+            {
+                _cameraNoise.m_AmplitudeGain = _targetVelocity / 8.0f;
+            }
+            else
+            {
+                _cameraNoise.m_AmplitudeGain = 0;
+            }
+
             var movement = transform.right * inputMovement.x + transform.forward * inputMovement.y;
             _characterController.SimpleMove(_currentVelocity * movement);
 
@@ -88,17 +114,46 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("Took Damange");
+        // Debug.Log("Took Damange");
+
+        if(_isControllingChaser) return;
+
+        _health = Mathf.Max(0, _health - damage);
         EventBroker.InvokePlayerHealthChanged(-damage);
+        if(_health <= 0)
+        {
+            EventBroker.InvokeGameOver();
+        }
+    }
+
+    public void Teleport(Vector3 position)
+    {
+        _characterController.enabled = false;
+        transform.position = position;
+        _characterController.enabled = true;
+    }
+
+    public void Heal(int heal)
+    {
+        // Debug.Log("Healed");
+        _health = Mathf.Min(_maxHealth, _health + heal);
+        EventBroker.InvokePlayerHealthChanged(heal);
     }
 
     private void Shoot(InputAction.CallbackContext context)
     {
         if(!_controls.PlayerActions.Aim.IsPressed()) return;
 
-        if(Physics.Raycast(_cameraController.transform.position, _cameraController.transform.forward, out RaycastHit hit, 100, _hitscanLayers))
+        if(Physics.Raycast(_cameraController.transform.position + _cameraController.transform.forward * 0.5f, _cameraController.transform.forward, out RaycastHit hit, 100, LayerMask.NameToLayer("Interactable")))
         {
-            hit.collider.GetComponentInParent<IDamageable>().TakeDamage(gameObject, DamageAmount(hit));
+            if(hit.collider.gameObject.layer == 7)
+            {
+                hit.collider.GetComponentInParent<IDamageable>().TakeDamage(gameObject, DamageAmount(hit));
+            }
+            else
+            {
+                Instantiate(_shotParticleSystem, hit.point, _cameraController.transform.rotation);
+            }
         }
 
         int DamageAmount(RaycastHit hit) => hit.collider.name switch 
@@ -118,18 +173,42 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if(Physics.Raycast(_cameraController.transform.position, _cameraController.transform.forward, out RaycastHit hit, 3, LayerMask.NameToLayer("Interactable")))
+        if(Physics.Raycast(_cameraController.transform.position, _cameraController.transform.forward, out RaycastHit hit, 3))
         {
-            Debug.Log(hit.collider.gameObject);
-            hit.collider.GetComponentInParent<IInteractable>().Interact(this);
+            // Debug.Log(hit.collider.gameObject);
+            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactable"))
+            {
+                hit.collider.GetComponent<IInteractable>().Interact(this);
+            }
         }
     }
 
     private void DetachChaser()
     {
-        isControllingChaser = false;
-        _cameraController.transform.localPosition = new Vector3(0, 0.8f, 0);
+        _isControllingChaser = false;
+        _cameraController.transform.localPosition = new Vector3(0, 0.5f, 0);
         _rotationDamp = 0.0f;
+        var thirdPersonFollow = _cinemachineCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+        thirdPersonFollow.CameraDistance = 0;
+        thirdPersonFollow.CameraCollisionFilter = 0;
+    }
+
+    private void AnimationIn()
+    {
+        _controls.PlayerActions.Disable();
+    }
+
+    private void AnimationOut()
+    {
+        _controls.PlayerActions.Enable();
+    }
+
+    private void HidePlayerForCutscene(Vector3 position, HideProp prop)
+    {
+        _characterController.enabled = false;
+        transform.position = position;
+        transform.rotation = prop.transform.rotation;
+        prop.Interact(this);
     }
 
     void OnDrawGizmos()

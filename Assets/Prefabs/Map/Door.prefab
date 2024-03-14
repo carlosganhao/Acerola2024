@@ -373,6 +373,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ee37f405b51524380d7b568cbd5929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _openAudio: {fileID: 8300000, guid: b93e5f7333c99c54c9ef1e15ee85d905, type: 3}
+  _closeAudio: {fileID: 8300000, guid: b61ad1a0d64c5f641afd57ea3cb2951f, type: 3}
+  _locked: 0
+  _lockedMessage: 
+  _unlockStep: 0
 --- !u!65 &2865730931916060659
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -392,5 +397,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.26, y: 2.28, z: 1}
+  m_Size: {x: 1.26, y: 2.28, z: 0.14}
   m_Center: {x: 0, y: 1.1, z: 2}

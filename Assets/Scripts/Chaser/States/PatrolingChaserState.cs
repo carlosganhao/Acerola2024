@@ -22,10 +22,14 @@ public class PatrolingChaserState : AbstractChaserState
 
     public override void EnterState()
     {
+        EventBroker.SoundTriggered += SoundListener;
+        
         _currentTargetWaypoint = MapController.Instance.GetClosestWaypointToPoint(controller.transform.position);
         // Debug.Log(_currentTargetWaypoint);
         controller._animator.SetBool("Moving", true);
+        controller._animator.SetBool("Running", false);
         controller._animator.SetBool("Aiming", false);
+        controller._characterLight.enabled = true;
         _scanTimeElapsed = _scanInitialCooldown;
         LookAtWaypoint();
     }
@@ -42,7 +46,7 @@ public class PatrolingChaserState : AbstractChaserState
 
         if(_scanTimeElapsed <= 0)
         {
-            Debug.Log("Scanning...");
+            // Debug.Log("Scanning...");
             ScanForPlayer();
             _scanTimeElapsed = _scanCooldown;
         }
@@ -119,7 +123,7 @@ public class PatrolingChaserState : AbstractChaserState
 
     private void ScanForPlayer()
     {
-        if(MapController.Instance.IsPlayerVisible(controller.transform.position))
+        if(MapController.Instance.IsPlayerVisible(controller.transform.position, controller.transform.forward))
         {
             controller.SwitchToState(controller.ChasingState);
         }
@@ -132,5 +136,11 @@ public class PatrolingChaserState : AbstractChaserState
         int oddsByDistance = (int)controller._distanceToPlayerOdds.Evaluate(distanceToPlayer);
         // Debug.Log($"Odds Generated = {oddsByDistance}");
         return oddsByDistance;
+    }
+
+    private void SoundListener(Vector3 position)
+    {
+        controller._soundPosition = position;
+        controller.SwitchToState(controller.ChasingState);
     }
 }

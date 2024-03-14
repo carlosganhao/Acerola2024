@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float _rotationDamp = 0.2f;
     [SerializeField] private float _zoomDamp = 0.2f;
     private BaseControls _controls;
-    private Camera _camera;
+    [SerializeField] private CinemachineVirtualCamera _camera;
     private float _currentRotationAdjust;
     private float _currentRotationVelocity;
     private float _currentRotation;
@@ -25,7 +26,7 @@ public class CameraController : MonoBehaviour
     void Awake()
     {
         _controls = new BaseControls();
-        _camera = GetComponent<Camera>();
+        // _camera = GetComponent<CinemachineVirtualCamera>();
     }
 
     // Start is called before the first frame update
@@ -35,11 +36,15 @@ public class CameraController : MonoBehaviour
         _currentRotation = transform.localEulerAngles.x;
 
         EventBroker.DetachChaser += DetachChaser;
+        EventBroker.AnimationIn += AnimationIn;
+        EventBroker.AnimationOut += AnimationOut;
     }
 
     void OnDestroy()
     {
         EventBroker.DetachChaser -= DetachChaser;
+        EventBroker.AnimationIn -= AnimationIn;
+        EventBroker.AnimationOut -= AnimationOut;
     }
 
     // Update is called once per frame
@@ -63,12 +68,22 @@ public class CameraController : MonoBehaviour
         }
 
         _currentFOVAdjust = Mathf.SmoothDamp(_currentFOVAdjust, _currentFOVTarget, ref _currentFOVVelocity, _zoomDamp);
-        _camera.fieldOfView = _currentFOVAdjust;
+        _camera.m_Lens.FieldOfView = _currentFOVAdjust;
     }
 
     private void DetachChaser()
     {
         isControllingChaser = false;
         _rotationDamp = 0;
+    }
+
+    private void AnimationIn()
+    {
+        _controls.PlayerActions.Disable();
+    }
+
+    private void AnimationOut()
+    {
+        _controls.PlayerActions.Enable();
     }
 }

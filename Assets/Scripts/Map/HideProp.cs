@@ -10,6 +10,8 @@ public class HideProp : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController controller)
     {
+        if(controller.IsControllingChaser) return;
+
         if(controller.PropHidingInsideOf is null)
         {
             controller.Hide(this);

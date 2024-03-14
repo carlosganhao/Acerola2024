@@ -1,23 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class ChaserController : MonoBehaviour
 {
-    public GameObject _placeholder;
+    public GameObject _shotParticleSystem;
     [HideInInspector] public ControlledChaserState ControlledState;
     [HideInInspector] public PatrolingChaserState PatrolingState;
     [HideInInspector] public ChasingChaserState ChasingState;
     [HideInInspector] public CharacterController _characterController;
+    [HideInInspector] public Vector3 _soundPosition;
     public Animator _animator;
     [HideInInspector] public BaseControls _controls;
     public AnimationCurve _distanceToPlayerOdds;
+    public Light _characterLight;
     private AbstractChaserState _currentState = null;
     private AbstractChaserState _previousState;
+    public CinemachineImpulseSource _impulseSource;
 
     void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
         
         _controls = new BaseControls();
 

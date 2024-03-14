@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66aceeed3cae9034ebab8fdac789b6c0, type: 3}
+  m_Name: A3
+  m_EditorClassIdentifier: 
+  Dialog:
+  - LeftParticipantName: 
+    RightParticipantName: Wounded Woman
+    Text: Thank you for the Desinfectant! This is going to come nice and handy!
+    WaitTime: 4000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - LeftParticipantName: 
+    RightParticipantName: 
+    Text: You know I keep finding these men trying to kill me when going to get those
+      things.
+    WaitTime: 6000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - LeftParticipantName: 
+    RightParticipantName: Wounded Woman
+    Text: They must be with the mad man! Im sorry I'm getting you in trouble... But
+      I need a bit more first aid... Could you get a needle to suture the wound?
+      Its in the Masters Bathroom. Here I'll give you the key for the Royal Area.
+    WaitTime: 10000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - LeftParticipantName: 
+    RightParticipantName: 
+    Text: Ok ok, just hope I dont get too swarmed. Come back in a bit.
+    WaitTime: 4000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls: []

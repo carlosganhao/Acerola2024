@@ -106,7 +106,7 @@ public class MapController : MonoBehaviour
 
         while(resultWaypoint is not null)
         {
-            Debug.Log($"Pathfinding Path: {resultWaypoint.waypoint.gameObject}");
+            // Debug.Log($"Pathfinding Path: {resultWaypoint.waypoint.gameObject}");
             result.Push(resultWaypoint.waypoint);
             resultWaypoint = resultWaypoint.parent;
         }
@@ -124,19 +124,16 @@ public class MapController : MonoBehaviour
         return GetDistanceToPlayer(waypoint.Position);
     }
 
-    public bool IsPlayerVisible(Vector3 position)
-    {
-        if(Physics.Raycast(position, _playerTransform.position - position, out RaycastHit hit, GetDistanceToPlayer(position), LayerMask.GetMask("Player", "Terrain")))
+    public bool IsPlayerVisible(Vector3 position, Vector3 forward)
+    {   
+        Vector3 directionToPlayer = _playerTransform.position - position;
+
+        if(Vector3.Dot(forward, directionToPlayer) > 0 && Physics.Raycast(position, directionToPlayer, out RaycastHit hit, GetDistanceToPlayer(position), LayerMask.GetMask("Player", "Terrain")))
         {
             // Debug.Log($"Hit at: {hit.point}, {hit.collider.gameObject}, {hit.collider.gameObject.layer}");
             return hit.collider.tag == "Player";
         }
         return false;
-    }
-
-    private bool HasLayer(LayerMask layerMask, int layer)
-    {
-        return layerMask == (layerMask | (1 << layer));
     }
 
     private class PathWaypoint

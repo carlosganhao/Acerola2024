@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66aceeed3cae9034ebab8fdac789b6c0, type: 3}
+  m_Name: A2
+  m_EditorClassIdentifier: 
+  Dialog:
+  - LeftParticipantName: 
+    RightParticipantName: Wounded Woman
+    Text: Good you got the key! Now if you can go to the Ball Room and get me some
+      Desinfectant!
+    WaitTime: 6000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - LeftParticipantName: 
+    RightParticipantName: 
+    Text: Ok, just sit tight, I'll help you.
+    WaitTime: 6000
+    EndAction:
+      m_PersistentCalls:
+        m_Calls: []

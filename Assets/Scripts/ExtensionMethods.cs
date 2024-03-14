@@ -9,4 +9,9 @@ public static class ExtensionMethods
         GameObject child = transform.GetChild(index).gameObject;
         GameObject.Destroy(child);
     }
+
+    private static bool HasLayer(this LayerMask layerMask, int layer)
+    {
+        return layerMask == (layerMask | (1 << layer));
+    }
 }
