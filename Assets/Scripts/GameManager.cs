@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         EventBroker.DetachChaser += DetachChaser;
         EventBroker.GameOver += GameOver;
+        _controls.PlayerActions.Enable();
         _controls.PlayerActions.Escape.performed += Escape;
 
         #if UNITY_EDITOR
