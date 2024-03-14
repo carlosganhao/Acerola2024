@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+    private BaseControls _controls;
     [SerializeField] private GameObject _zombieContainer;
     [SerializeField] private PlayerController _player;
     [SerializeField] private List<Transform> _spawnPoints;
@@ -15,6 +17,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         EventBroker.DetachChaser += DetachChaser;
         EventBroker.GameOver += GameOver;
+        _controls.PlayerActions.Escape.performed += Escape;
 
         #if UNITY_EDITOR
         PlayerPrefs.SetInt("Phase", 0);
@@ -49,7 +52,13 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("Gameover");
+        // Debug.Log("Gameover");
+        Application.Quit();
+    }
+
+    private void Escape(InputAction.CallbackContext context)
+    {
+        // Debug.Log("Gameover");
         Application.Quit();
     }
 }
