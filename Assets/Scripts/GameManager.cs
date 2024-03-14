@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +16,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         EventBroker.DetachChaser += DetachChaser;
         EventBroker.GameOver += GameOver;
+        _controls = new BaseControls();
         _controls.PlayerActions.Enable();
         _controls.PlayerActions.Escape.performed += Escape;
 
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     private void Escape(InputAction.CallbackContext context)
     {
-        // Debug.Log("Gameover");
+        Debug.Log("Gameover");
         Application.Quit();
     }
 }
