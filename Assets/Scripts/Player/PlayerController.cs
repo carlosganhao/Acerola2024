@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
     {
         if(!_controls.PlayerActions.Aim.IsPressed()) return;
 
-        if(Physics.Raycast(_cameraController.transform.position + _cameraController.transform.forward * 0.5f, _cameraController.transform.forward, out RaycastHit hit, 100, LayerMask.NameToLayer("Interactable")))
+        if(Physics.Raycast(_cameraController.transform.position + _cameraController.transform.forward * 0.5f, _cameraController.transform.forward, out RaycastHit hit, 100))
         {
             if(hit.collider.gameObject.layer == 7)
             {
