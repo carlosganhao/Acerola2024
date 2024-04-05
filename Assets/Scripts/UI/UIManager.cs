@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using TMPro;
 using System.Threading.Tasks;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
@@ -21,15 +23,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _rightParticipant => _rightParticipantName.transform.parent.gameObject;
     [SerializeField] private TextMeshProUGUI _leftParticipantName;
     [SerializeField] private GameObject _leftParticipant => _leftParticipantName.transform.parent.gameObject;
+    private BaseControls _controls;
 
     void Awake()
     {
         Instance = this;
+        _controls = new BaseControls();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        _controls.Enable();
         _objectiveText.SetText("");
         _speechBubble.SetActive(false);
 
@@ -59,10 +64,10 @@ public class UIManager : MonoBehaviour
     {
         if(healthChange < 0)
         {
-            var crack = Instantiate(_screenCrackPrefab, new Vector3(Random.value * Screen.width, Random.value * Screen.height, 0), Quaternion.identity, _healthIndiciatorContainer);
-            float value = Random.value;
+            var crack = Instantiate(_screenCrackPrefab, new Vector3(UnityEngine.Random.value * Screen.width, UnityEngine.Random.value * Screen.height, 0), Quaternion.identity, _healthIndiciatorContainer);
+            float value = UnityEngine.Random.value;
             crack.rectTransform.sizeDelta = new Vector2(Mathf.Max(value*500, 100), Mathf.Max(value*500, 100));
-            crack.sprite = _crackList[Random.Range(0, _crackList.Count)];
+            crack.sprite = _crackList[UnityEngine.Random.Range(0, _crackList.Count)];
         }
         else
         {
@@ -92,11 +97,31 @@ public class UIManager : MonoBehaviour
             SetParticipantName(0, dialog.LeftParticipantName);
             SetParticipantName(1, dialog.RightParticipantName);
             _speechText.SetText(dialog.Text);
-            await Task.Delay(dialog.WaitTime);
+            List<Task> tasks = new List<Task>(){Task.Delay(dialog.WaitTime)};
+            if(dialog.AllowSkip)
+            {
+                tasks.Add(AwaitForKey(_controls.PlayerActions.Interact));
+            }
+            await Task.WhenAny(tasks);
             dialog.EndAction.Invoke();
         }
         _speechBubble.SetActive(false);
         EventBroker.InvokeDialogEnded();
+    }
+
+    private Task AwaitForKey(InputAction input)
+    {
+        var completionSource = new TaskCompletionSource<bool>();
+        
+        Action<InputAction.CallbackContext> keyPressedDelegate = null;
+        keyPressedDelegate = (context) => {
+            completionSource.SetResult(true);
+            input.performed -= keyPressedDelegate;
+        };
+
+        input.performed += keyPressedDelegate;
+
+        return completionSource.Task;
     }
 
     private void SetParticipantName(int side, string name)
@@ -129,5 +154,6 @@ public class Dialog
     public string RightParticipantName;
     public string Text;
     public int WaitTime;
+    public bool AllowSkip = true;
     public UnityEvent EndAction;
 }
