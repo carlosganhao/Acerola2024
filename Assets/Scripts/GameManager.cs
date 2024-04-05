@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour
 
     private void Escape(InputAction.CallbackContext context)
     {
-        Debug.Log("Gameover");
         Application.Quit();
     }
 }

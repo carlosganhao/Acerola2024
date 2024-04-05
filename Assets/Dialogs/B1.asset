@@ -18,7 +18,8 @@ MonoBehaviour:
     Text: Thank you! Feeling much better, I just need one more thing. I need some
       bandages. The wound is mostly closed but it is still bleeding, could you go
       back to the bathroom and get some please?
-    WaitTime: 10000
+    WaitTime: 20000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls: []
@@ -26,21 +27,24 @@ MonoBehaviour:
     RightParticipantName: 
     Text: You know I was ambushed my crazy men every single time I went to get something
       to help you out
-    WaitTime: 5000
+    WaitTime: 10000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls: []
   - LeftParticipantName: 
     RightParticipantName: 
     Text: Maybe you are with them! Maybe you are trying to set me up!
-    WaitTime: 5000
+    WaitTime: 10000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls: []
   - LeftParticipantName: 
     RightParticipantName: Wounded Woman
     Text: Im not! I swear!
-    WaitTime: 3000
+    WaitTime: 6000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls:
@@ -60,7 +64,8 @@ MonoBehaviour:
     RightParticipantName: 
     Text: I dont trust you, I'll just shoot you and stop whatever is going on in
       this place
-    WaitTime: 5000
+    WaitTime: 10000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls:
@@ -91,7 +96,8 @@ MonoBehaviour:
   - LeftParticipantName: Player Character
     RightParticipantName: 
     Text: Dont shoot her! She is injured!
-    WaitTime: 3000
+    WaitTime: 4000
+    AllowSkip: 0
     EndAction:
       m_PersistentCalls:
         m_Calls:
@@ -111,6 +117,7 @@ MonoBehaviour:
     RightParticipantName: 
     Text: I told you to shoot her! Why are you not obeying?
     WaitTime: 3000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls:
@@ -130,7 +137,8 @@ MonoBehaviour:
     RightParticipantName: 
     Text: I'm done following you orders! You made me kill so many people, probably
       half of them weren't even bad! You are the bad guy, and I'll stop you!
-    WaitTime: 3000
+    WaitTime: 6000
+    AllowSkip: 0
     EndAction:
       m_PersistentCalls:
         m_Calls:
@@ -162,13 +170,15 @@ MonoBehaviour:
     RightParticipantName: 
     Text: 
     WaitTime: 2000
+    AllowSkip: 0
     EndAction:
       m_PersistentCalls:
         m_Calls: []
   - LeftParticipantName: Player Character
     RightParticipantName: 
     Text: Now that I'm free, Ill stop you from murdering anyone else!
-    WaitTime: 4000
+    WaitTime: 6000
+    AllowSkip: 0
     EndAction:
       m_PersistentCalls:
         m_Calls:

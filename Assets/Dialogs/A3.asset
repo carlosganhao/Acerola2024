@@ -16,7 +16,8 @@ MonoBehaviour:
   - LeftParticipantName: 
     RightParticipantName: Wounded Woman
     Text: Thank you for the Desinfectant! This is going to come nice and handy!
-    WaitTime: 4000
+    WaitTime: 8000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls: []
@@ -24,7 +25,8 @@ MonoBehaviour:
     RightParticipantName: 
     Text: You know I keep finding these men trying to kill me when going to get those
       things.
-    WaitTime: 6000
+    WaitTime: 12000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls: []
@@ -33,14 +35,16 @@ MonoBehaviour:
     Text: They must be with the mad man! Im sorry I'm getting you in trouble... But
       I need a bit more first aid... Could you get a needle to suture the wound?
       Its in the Masters Bathroom. Here I'll give you the key for the Royal Area.
-    WaitTime: 10000
+    WaitTime: 20000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls: []
   - LeftParticipantName: 
     RightParticipantName: 
     Text: Ok ok, just hope I dont get too swarmed. Come back in a bit.
-    WaitTime: 4000
+    WaitTime: 8000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls: []

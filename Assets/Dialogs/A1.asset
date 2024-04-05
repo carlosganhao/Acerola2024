@@ -17,14 +17,16 @@ MonoBehaviour:
     RightParticipantName: Wounded Woman
     Text: Please help me! Theres a mad man arround shooting everyone! I need desinfectant.
       Could you please go and get the Ball Room Key? It is in the Chief's Room...
-    WaitTime: 6000
+    WaitTime: 12000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls: []
   - LeftParticipantName: 
     RightParticipantName: 
     Text: Ok, i'll go get the key and come back later.
-    WaitTime: 4000
+    WaitTime: 8000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls: []

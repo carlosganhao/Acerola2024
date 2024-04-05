@@ -17,14 +17,16 @@ MonoBehaviour:
     RightParticipantName: Wounded Woman
     Text: Good you got the key! Now if you can go to the Ball Room and get me some
       Desinfectant!
-    WaitTime: 6000
+    WaitTime: 12000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls: []
   - LeftParticipantName: 
     RightParticipantName: 
     Text: Ok, just sit tight, I'll help you.
-    WaitTime: 6000
+    WaitTime: 12000
+    AllowSkip: 1
     EndAction:
       m_PersistentCalls:
         m_Calls: []
