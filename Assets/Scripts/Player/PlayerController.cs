@@ -20,7 +20,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _velocityDamp = 0.2f;
     [SerializeField] private float _horizontalMouseSensitivity = 0.1f;
     [SerializeField] private float _rotationDamp = 0.2f;
+    [SerializeField] private float _soundRadius = 10;
+    [SerializeField] private float _soundCooldown = 0.75f;
     private int _health;
+    private float _soundCooldownTime;
     private BaseControls _controls; 
     private CharacterController _characterController;
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
@@ -46,6 +49,7 @@ public class PlayerController : MonoBehaviour
         _controls.PlayerActions.Enable();
 
         _health = _maxHealth;
+        _soundCooldownTime = _soundCooldown;
         _currentVelocity = _maxVelocity; 
 
         _controls.PlayerActions.Shoot.performed += Shoot;
@@ -70,6 +74,12 @@ public class PlayerController : MonoBehaviour
         else if(_controls.PlayerActions.Run.IsPressed())
         {
             _targetVelocity = _maxRunVelocity;
+
+            if(_soundCooldownTime < 0)
+            {
+                MakeSound();
+                _soundCooldownTime = _soundCooldown; 
+            }
         }
         else
         {
@@ -98,6 +108,8 @@ public class PlayerController : MonoBehaviour
 
             // Debug.Log($"Position: {transform.position}, Movement: {movement}");
         }
+
+        _soundCooldownTime -= Time.deltaTime;
     }
 
     public void Hide(HideProp hideProp)
@@ -110,6 +122,15 @@ public class PlayerController : MonoBehaviour
     {
         PropHidingInsideOf = null;
         _characterController.enabled = true;
+    }
+
+    public void MakeSound()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, _soundRadius, LayerMask.NameToLayer("Character"));
+        if(hits.Length > 0)
+        {
+            EventBroker.InvokeSoundTriggered(transform.position);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -215,5 +236,7 @@ public class PlayerController : MonoBehaviour
     {
         // Gizmos.color = Color.red;
         // Gizmos.DrawRay(_cameraController.transform.position, _cameraController.transform.forward * 3);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _soundRadius);
     }
 }

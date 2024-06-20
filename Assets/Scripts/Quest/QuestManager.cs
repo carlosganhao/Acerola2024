@@ -136,7 +136,11 @@ public class QuestManager : MonoBehaviour
     public void BlowUpMouseAnimation() => _animator.SetTrigger("MouseBlowUp");
     public void HidePlayerAnimation() => _animator.SetTrigger("Hide");
     public void Detach() => EventBroker.InvokeDetachChaser();
-    public void MoveCharacterAway() => EventBroker.InvokeSoundTriggered(new Vector3(-16, 0, -8));
+    public void MoveCharacterAway()
+    {
+        EventBroker.InvokeSoundTriggered(new Vector3(-16, 0, -8));
+        EventBroker.InvokeDeafenChaser(10);
+    }
     public void HidePlayerInProp() => EventBroker.InvokeHidePlayerForCutscene(new Vector3(-32, 1, 12.5f) ,_hidePropForCutscene);
  
     private async void SwitchTargetGroup(CinemachineTargetGroup group)

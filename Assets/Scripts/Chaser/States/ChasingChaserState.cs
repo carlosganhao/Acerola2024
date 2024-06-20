@@ -21,6 +21,8 @@ public class ChasingChaserState : AbstractChaserState
 
     public override void EnterState()
     {
+        EventBroker.SoundTriggered += SoundListener;
+
         if(controller._soundPosition != Vector3.zero)
         {
             GetPathTo(controller._soundPosition);
@@ -160,5 +162,14 @@ public class ChasingChaserState : AbstractChaserState
             // Debug.Log($"Trying to use action {direction} of {waypoint}");
             waypoint.InteractEvents[direction].Invoke();
         }
+    }
+    
+    private void SoundListener(Vector3 position)
+    {
+        if(controller._deafenDuration > 0) return;
+
+        GetPathTo(controller._soundPosition);
+        GetNextTargetWaypoint();
+        controller._soundPosition = Vector3.zero;
     }
 }
