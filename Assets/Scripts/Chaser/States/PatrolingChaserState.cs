@@ -140,6 +140,8 @@ public class PatrolingChaserState : AbstractChaserState
 
     private void SoundListener(Vector3 position)
     {
+        if(controller._deafenDuration > 0) return;
+
         controller._soundPosition = position;
         controller.SwitchToState(controller.ChasingState);
     }

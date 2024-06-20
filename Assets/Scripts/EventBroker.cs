@@ -166,5 +166,13 @@ public static class EventBroker
             ItemPickedUp();
     }
 
+    public static event Action<float> DeafenChaser;
+
+    public static void InvokeDeafenChaser(float duration)
+    {
+        if (DeafenChaser != null)
+            DeafenChaser(duration);
+    }
+
     #endregion
 }

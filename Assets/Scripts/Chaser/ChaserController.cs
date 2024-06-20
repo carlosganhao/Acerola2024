@@ -11,6 +11,7 @@ public class ChaserController : MonoBehaviour
     [HideInInspector] public ChasingChaserState ChasingState;
     [HideInInspector] public CharacterController _characterController;
     [HideInInspector] public Vector3 _soundPosition;
+    [HideInInspector] public float _deafenDuration;
     public Animator _animator;
     [HideInInspector] public BaseControls _controls;
     public AnimationCurve _distanceToPlayerOdds;
@@ -29,6 +30,8 @@ public class ChaserController : MonoBehaviour
         ControlledState = new ControlledChaserState(this);
         PatrolingState = new PatrolingChaserState(this);
         ChasingState = new ChasingChaserState(this);
+
+        EventBroker.DeafenChaser += DeafenChaser;
     }
 
     // Start is called before the first frame update
@@ -41,6 +44,11 @@ public class ChaserController : MonoBehaviour
     void Update()
     {
         _currentState.UpdateState();
+
+        if(_deafenDuration > 0)
+        {
+            _deafenDuration -= Time.deltaTime;
+        }
     }
 
     public void SwitchToState(AbstractChaserState newState)
@@ -48,5 +56,10 @@ public class ChaserController : MonoBehaviour
         if(_currentState is not null) _currentState.ExitState();
         _currentState = newState;
         _currentState.EnterState();
+    }
+
+    private void DeafenChaser(float duration)
+    {
+        _deafenDuration = duration;
     }
 }

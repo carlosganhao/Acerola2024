@@ -8,6 +8,7 @@ public class MapController : MonoBehaviour
     public static MapController Instance { get; private set; }
     public Vector3 PlayerPosition { get => _playerTransform.position; }
     [SerializeField] private Transform _playerTransform;
+    [SerializeField] private float _sphereCastRadius;
     [SerializeField] private List<Waypoint> _waypoints = new List<Waypoint>();
 
     void Awake()
@@ -128,7 +129,7 @@ public class MapController : MonoBehaviour
     {   
         Vector3 directionToPlayer = _playerTransform.position - position;
 
-        if(Vector3.Dot(forward, directionToPlayer) > 0 && Physics.Raycast(position, directionToPlayer, out RaycastHit hit, GetDistanceToPlayer(position), LayerMask.GetMask("Player", "Terrain")))
+        if(Vector3.Dot(forward, directionToPlayer) > 0 && Physics.SphereCast(position, _sphereCastRadius, directionToPlayer, out RaycastHit hit, GetDistanceToPlayer(position), LayerMask.GetMask("Player", "Terrain")))
         {
             // Debug.Log($"Hit at: {hit.point}, {hit.collider.gameObject}, {hit.collider.gameObject.layer}");
             return hit.collider.tag == "Player";
