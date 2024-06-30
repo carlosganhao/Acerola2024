@@ -51,6 +51,11 @@ public class ChaserController : MonoBehaviour
         }
     }
 
+    public void OnDestroy()
+    {
+        _currentState?.ExitState();
+    }
+
     public void SwitchToState(AbstractChaserState newState)
     {
         if(_currentState is not null) _currentState.ExitState();

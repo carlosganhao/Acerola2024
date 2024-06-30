@@ -9,6 +9,6 @@ public class CharacterShootEventAsset : ScriptableObject
     {
         EventBroker.InvokeCharacterShoot();
         if(hurtPlayer)
-            EventBroker.InvokePlayerHealthChanged(-1);
+            EventBroker.InvokePlayerHealthChanged(-1, false);
     }
 }

@@ -112,6 +112,16 @@ public class PlayerController : MonoBehaviour
         _soundCooldownTime -= Time.deltaTime;
     }
 
+    public void OnDestroy()
+    {
+        _controls.PlayerActions.Shoot.performed -= Shoot;
+        _controls.PlayerActions.Interact.performed -= Interact;
+        EventBroker.DetachChaser -= DetachChaser;
+        EventBroker.AnimationIn -= AnimationIn;
+        EventBroker.AnimationOut -= AnimationOut;
+        EventBroker.HidePlayerForCutscene -= HidePlayerForCutscene;
+    }
+
     public void Hide(HideProp hideProp)
     {
         PropHidingInsideOf = hideProp;
@@ -135,12 +145,10 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        // Debug.Log("Took Damange");
-
-        if(_isControllingChaser) return;
+         Debug.Log("Took Damange");
 
         _health = Mathf.Max(0, _health - damage);
-        EventBroker.InvokePlayerHealthChanged(-damage);
+        EventBroker.InvokePlayerHealthChanged(-damage, _isControllingChaser);
         if(_health <= 0)
         {
             EventBroker.InvokeGameOver();
@@ -158,7 +166,7 @@ public class PlayerController : MonoBehaviour
     {
         // Debug.Log("Healed");
         _health = Mathf.Min(_maxHealth, _health + heal);
-        EventBroker.InvokePlayerHealthChanged(heal);
+        EventBroker.InvokePlayerHealthChanged(heal, _isControllingChaser);
     }
 
     private void Shoot(InputAction.CallbackContext context)

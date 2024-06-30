@@ -7,15 +7,18 @@ using System.Threading.Tasks;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
+    [SerializeField] private RawImage _gameView;
     [SerializeField] private Transform _healthIndiciatorContainer;
     [SerializeField] private Image _screenCrackPrefab;
     [SerializeField] private List<Sprite> _crackList;
-    [SerializeField] private GameObject _gameFinishedUI;
+    [SerializeField] private GameObject _gameOverEarlyUI;
+    [SerializeField] private GameObject _gameOverFinalUI;
     [SerializeField] private TextMeshProUGUI _objectiveText;
     [SerializeField] private GameObject _speechBubble;
     [SerializeField] private TextMeshProUGUI _speechText;
@@ -37,13 +40,15 @@ public class UIManager : MonoBehaviour
         _controls.Enable();
         _objectiveText.SetText("");
         _speechBubble.SetActive(false);
+        _gameView.material.SetFloat("_TexelOffset", 0);
+        _gameView.material.SetFloat("_OffsetDirection",0);
+        _gameView.material.SetFloat("_Grainyness", 0);
 
         EventBroker.PlayerHealthChanged += HealthChanged;
         EventBroker.QuestStepActivated += QuestActivated;
         EventBroker.QuestStepFulfilled += QuestFulfilled;
         EventBroker.WriteMessage += WriteMessage;
         EventBroker.DialogStarted += WriteDialog;
-        EventBroker.GameFinished += GameFinished;
     }
 
     // Update is called once per frame
@@ -60,18 +65,32 @@ public class UIManager : MonoBehaviour
         EventBroker.WriteMessage -= WriteMessage;
     }
 
-    void HealthChanged(int healthChange)
+    void HealthChanged(int healthChange, bool isControllingChaser)
     {
-        if(healthChange < 0)
+        if(isControllingChaser)
         {
-            var crack = Instantiate(_screenCrackPrefab, new Vector3(UnityEngine.Random.value * Screen.width, UnityEngine.Random.value * Screen.height, 0), Quaternion.identity, _healthIndiciatorContainer);
-            float value = UnityEngine.Random.value;
-            crack.rectTransform.sizeDelta = new Vector2(Mathf.Max(value*500, 100), Mathf.Max(value*500, 100));
-            crack.sprite = _crackList[UnityEngine.Random.Range(0, _crackList.Count)];
+            if(healthChange < 0)
+            {
+
+            }   
+            else
+            {
+                
+            }
         }
         else
         {
-            _healthIndiciatorContainer.DeleteChild(0);
+            if(healthChange < 0)
+            {
+                var crack = Instantiate(_screenCrackPrefab, new Vector3(UnityEngine.Random.value * Screen.width, UnityEngine.Random.value * Screen.height, 0), Quaternion.identity, _healthIndiciatorContainer);
+                float value = UnityEngine.Random.value;
+                crack.rectTransform.sizeDelta = new Vector2(Mathf.Max(value*500, 100), Mathf.Max(value*500, 100));
+                crack.sprite = _crackList[UnityEngine.Random.Range(0, _crackList.Count)];
+            }
+            else
+            {
+                _healthIndiciatorContainer.DeleteChild(0);
+            }
         }
     }
 
@@ -141,9 +160,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void GameFinished()
+    public void ShowDeathScreen()
     {
-        _gameFinishedUI.SetActive(true);
+        _gameOverEarlyUI.SetActive(true);
+    }
+
+    public void ShowGameOverScreen()
+    {
+        _gameOverFinalUI.SetActive(true);
+    }
+
+    public void GlitchEffect()
+    {
+        Tween offsetTween = _gameView.material.DOFloat(100, "_TexelOffset", 1.5f);
+        var directionTween = _gameView.material.DOFloat(-1, "_OffsetDirection", 1.5f);
+        var noiseTween = _gameView.material.DOFloat(0.25f, "_Grainyness", 1.5f);
     }
 }
 
