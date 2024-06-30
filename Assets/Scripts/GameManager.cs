@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _zombieContainer;
     [SerializeField] private PlayerController _player;
     [SerializeField] private List<Transform> _spawnPoints;
+
+    private int _phase = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +31,7 @@ public class GameManager : MonoBehaviour
         if(PlayerPrefs.GetInt("Phase") == 2)
         {
             EventBroker.InvokeDetachChaser();
+            _phase = 2;
             _player.TakeDamage(1);
             _player.Teleport(_spawnPoints[Random.Range(0, _spawnPoints.Count)].position);
             QuestManager.Instance.BootstrapSecondPhase();
@@ -48,17 +53,44 @@ public class GameManager : MonoBehaviour
     private void DetachChaser()
     {
         PlayerPrefs.SetInt("Phase", 2);
+        _phase = 2;
         Destroy(_zombieContainer);
     }
 
     private void GameOver()
     {
         // Debug.Log("Gameover");
-        Application.Quit();
+        if(_phase == 0)
+        {
+            StartCoroutine(DeathAnimation());
+            return;
+        }
+        StartCoroutine(GameOverAnimation());
     }
 
     private void Escape(InputAction.CallbackContext context)
     {
         Application.Quit();
+    }
+
+    private IEnumerator DeathAnimation()
+    {
+        UIManager.Instance.ShowDeathScreen();
+        yield return new WaitUntil(() => Keyboard.current.anyKey.wasPressedThisFrame);
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    private IEnumerator GameOverAnimation()
+    {
+        Debug.Log("Stopping Time");
+        Time.timeScale = 0.0f;
+        // Glitch Effect Here
+        UIManager.Instance.GlitchEffect();
+        yield return new WaitForSecondsRealtime(2);
+        Debug.Log("Showing Game Over Screen");
+        UIManager.Instance.ShowGameOverScreen();
+        yield return new WaitForSecondsRealtime(1);
+        Debug.Log("Quitting Game");
+        ExtensionMethods.QuitGame();
     }
 }

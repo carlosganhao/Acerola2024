@@ -52,6 +52,7 @@ public class ZombieController : MonoBehaviour, IDamageable
             {
                 if(collider.gameObject.layer == 6 && _attackElapsedTime < 0)
                     {
+                        collider.GetComponent<PlayerController>().TakeDamage(1);
                         _impulseSource.GenerateImpulse(4);
                         _animator.SetTrigger("Stab");
                         _attackElapsedTime = _attackCooldown;

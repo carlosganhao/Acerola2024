@@ -10,8 +10,19 @@ public static class ExtensionMethods
         GameObject.Destroy(child);
     }
 
-    private static bool HasLayer(this LayerMask layerMask, int layer)
+    public static bool HasLayer(this LayerMask layerMask, int layer)
     {
         return layerMask == (layerMask | (1 << layer));
+    }
+
+    public static void QuitGame()
+    {
+        #if UNITY_EDITOR
+            Debug.Log("Quitting Editor");
+            UnityEditor.EditorApplication.ExitPlaymode();
+        #else
+            Debug.Log("Quitting Application");
+            Application.Quit();
+        #endif
     }
 }
