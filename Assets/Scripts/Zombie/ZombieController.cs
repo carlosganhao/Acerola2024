@@ -14,6 +14,7 @@ public class ZombieController : MonoBehaviour, IDamageable
     [SerializeField] private float _attackCooldown = 1;
     private CharacterController _characterController;
     private CinemachineImpulseSource _impulseSource;
+    private AudioSource _audioSource;
     private float _attackElapsedTime;
     private int _health;
     private Transform _currentTarget;
@@ -22,6 +23,7 @@ public class ZombieController : MonoBehaviour, IDamageable
     {
         _characterController = GetComponent<CharacterController>();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -84,6 +86,7 @@ public class ZombieController : MonoBehaviour, IDamageable
 
     private void SetTarget(Transform transform)
     {
+        _audioSource.PlayDelayed(Random.Range(0.0f, 0.1f));
         _currentTarget = transform;
     }
 
