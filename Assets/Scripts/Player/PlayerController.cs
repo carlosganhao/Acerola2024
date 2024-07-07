@@ -22,11 +22,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _rotationDamp = 0.2f;
     [SerializeField] private float _soundRadius = 10;
     [SerializeField] private float _soundCooldown = 0.75f;
+    [SerializeField] private AudioClip _stabSound;
+    [SerializeField] private AudioClip _cameraCrackSound;
     private int _health;
     private float _soundCooldownTime;
     private BaseControls _controls; 
     private CharacterController _characterController;
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
+    private AudioSource _audioSource;
     private float _currentRotationAdjust;
     private float _currentRotationVelocity;
     private float _targetVelocity;
@@ -41,6 +44,7 @@ public class PlayerController : MonoBehaviour
         _controls = new BaseControls();
         _characterController = GetComponent<CharacterController>();
         _cameraNoise = _cinemachineCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        _audioSource = GetComponent<AudioSource>();
     }
     
     // Start is called before the first frame update
@@ -145,10 +149,19 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-         Debug.Log("Took Damange");
+        // Debug.Log("Took Damange");
 
         _health = Mathf.Max(0, _health - damage);
         EventBroker.InvokePlayerHealthChanged(-damage, _isControllingChaser);
+        if(_isControllingChaser)
+        {
+            _audioSource.PlayOneShot(_stabSound);
+        }
+        else
+        {
+            _audioSource.PlayOneShot(_cameraCrackSound);
+        }
+
         if(_health <= 0)
         {
             EventBroker.InvokeGameOver();
