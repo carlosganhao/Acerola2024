@@ -40,7 +40,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         if(_locked)
         {
-            EventBroker.InvokeWriteMessage(_lockedMessage);
+            EventBroker.InvokeWriteMessage(_lockedMessage, null, null);
             return;
         }
 

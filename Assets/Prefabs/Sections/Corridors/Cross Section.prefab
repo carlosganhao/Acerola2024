@@ -35,7 +35,7 @@ Transform:
   - {fileID: 8382920716359577204}
   - {fileID: 8049804628026095565}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &494174540844857038
 PrefabInstance:
@@ -153,6 +153,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5611811191499114611, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_Reverb
+      value: 441
+      objectReference: {fileID: 0}
+    - target: {fileID: 5611811191499114611, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_RoomHF
+      value: -300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5611811191499114611, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_Reflections
+      value: -1219
+      objectReference: {fileID: 0}
+    - target: {fileID: 5611811191499114611, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_DecayHFRatio
+      value: 0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 5611811191499114611, guid: bba0e59d215c5c748be7d03e03a0000c,
+        type: 3}
+      propertyPath: m_ReverbPreset
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5891880387211591115, guid: bba0e59d215c5c748be7d03e03a0000c,
         type: 3}

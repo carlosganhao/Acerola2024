@@ -12,6 +12,7 @@ public class PatrolingChaserState : AbstractChaserState
     private float _scanInitialCooldown = 10.0f;
     private float _scanCooldown = 1.0f;
     private float _scanTimeElapsed = 0f;
+    private float _banterTimeElapsed = 0f;
     private Waypoint _currentTargetWaypoint;
     private Waypoint _previousTargetWaypoint;
 
@@ -31,6 +32,7 @@ public class PatrolingChaserState : AbstractChaserState
         controller._animator.SetBool("Aiming", false);
         controller._characterLight.enabled = true;
         _scanTimeElapsed = _scanInitialCooldown;
+        _banterTimeElapsed = UnityEngine.Random.Range(controller._minBanterCooldown, controller._maxBanterCooldown);
         LookAtWaypoint();
     }
 
@@ -55,13 +57,23 @@ public class PatrolingChaserState : AbstractChaserState
             _scanTimeElapsed -= Time.deltaTime;
         }
 
+        if(_banterTimeElapsed <= 0)
+        {
+            controller.PlayReaction(ChaserController.ReactionType.reaction_banter);
+            _banterTimeElapsed = UnityEngine.Random.Range(controller._minBanterCooldown, controller._maxBanterCooldown);
+        }
+        else
+        {
+            _banterTimeElapsed -= Time.deltaTime; 
+        }
+
         //controller.transform.LookAt(_currentTargetWaypoint.Position, Vector3.up);
         controller._characterController.SimpleMove(controller.transform.forward * _patrolingSpeed);
     }
 
     public override void ExitState()
     {
-
+        EventBroker.SoundTriggered -= SoundListener;
     }
 
     private void PickNextPatrolWaypoint()
@@ -143,6 +155,7 @@ public class PatrolingChaserState : AbstractChaserState
         if(controller._deafenDuration > 0) return;
 
         controller._soundPosition = position;
+        controller.PlayReaction(ChaserController.ReactionType.reaction_heard);
         controller.SwitchToState(controller.ChasingState);
     }
 }
