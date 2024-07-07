@@ -54,12 +54,12 @@ public static class EventBroker
             QuestStepFulfilled(step, message);
     }
 
-    public static event Action<string> WriteMessage;
+    public static event Action<string, string, string> WriteMessage;
 
-    public static void InvokeWriteMessage(string message)
+    public static void InvokeWriteMessage(string message, string leftParticipantName, string rightParticipantName)
     {
         if (WriteMessage != null)
-            WriteMessage(message);
+            WriteMessage(message, leftParticipantName, rightParticipantName);
     }
 
     public static event Action AnimationIn;

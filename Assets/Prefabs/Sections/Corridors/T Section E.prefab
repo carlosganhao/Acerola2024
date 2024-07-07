@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 242439024749819054, guid: f468a35014998cb47a05fc68d19c3b9e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 242439024749819054, guid: f468a35014998cb47a05fc68d19c3b9e,
         type: 3}
@@ -102,6 +102,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133481479840330180, guid: f468a35014998cb47a05fc68d19c3b9e,
+        type: 3}
+      propertyPath: m_Reverb
+      value: 441
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133481479840330180, guid: f468a35014998cb47a05fc68d19c3b9e,
+        type: 3}
+      propertyPath: m_RoomHF
+      value: -300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133481479840330180, guid: f468a35014998cb47a05fc68d19c3b9e,
+        type: 3}
+      propertyPath: m_Reflections
+      value: -1219
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133481479840330180, guid: f468a35014998cb47a05fc68d19c3b9e,
+        type: 3}
+      propertyPath: m_DecayHFRatio
+      value: 0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133481479840330180, guid: f468a35014998cb47a05fc68d19c3b9e,
+        type: 3}
+      propertyPath: m_ReverbPreset
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7989264354259466658, guid: f468a35014998cb47a05fc68d19c3b9e,
         type: 3}

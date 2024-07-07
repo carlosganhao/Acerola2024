@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public static class ExtensionMethods
 {
@@ -24,5 +25,59 @@ public static class ExtensionMethods
             Debug.Log("Quitting Application");
             Application.Quit();
         #endif
+    }
+}
+
+public class WaitUntilFor : CustomYieldInstruction
+{
+    public override bool keepWaiting => !CheckDone();
+
+    private Func<bool> _predicate;
+    private float _timeout;
+    private float _elapsedTime = 0;
+
+    public WaitUntilFor(Func<bool> predicate, float timeout)
+    {
+        this._predicate = predicate;
+        this._timeout = timeout;
+    }
+
+    public override void Reset()
+    {
+        _elapsedTime = 0;
+    }
+
+    private bool CheckDone()
+    {
+        bool result = _predicate() || _elapsedTime >= _timeout;
+        _elapsedTime += Time.deltaTime;
+        return result;
+    }
+}
+
+public class WaitUntilForRealtime : CustomYieldInstruction
+{
+    public override bool keepWaiting => !CheckDone();
+
+    private Func<bool> _predicate;
+    private float _timeout;
+    private float _elapsedTime = 0;
+
+    public WaitUntilForRealtime(Func<bool> predicate, float timeout)
+    {
+        this._predicate = predicate;
+        this._timeout = timeout;
+    }
+
+    public override void Reset()
+    {
+        _elapsedTime = 0;
+    }
+
+    private bool CheckDone()
+    {
+        bool result = _predicate() || _elapsedTime >= _timeout;
+        _elapsedTime += Time.unscaledDeltaTime;
+        return result;
     }
 }

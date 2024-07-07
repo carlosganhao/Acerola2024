@@ -26,7 +26,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _rightParticipant => _rightParticipantName.transform.parent.gameObject;
     [SerializeField] private TextMeshProUGUI _leftParticipantName;
     [SerializeField] private GameObject _leftParticipant => _leftParticipantName.transform.parent.gameObject;
+    [SerializeField] private TextMeshProUGUI  _interactionText;
     private BaseControls _controls;
+    private Coroutine _messageCoroutine;
 
     void Awake()
     {
@@ -47,8 +49,8 @@ public class UIManager : MonoBehaviour
         EventBroker.PlayerHealthChanged += HealthChanged;
         EventBroker.QuestStepActivated += QuestActivated;
         EventBroker.QuestStepFulfilled += QuestFulfilled;
-        EventBroker.WriteMessage += WriteMessage;
-        EventBroker.DialogStarted += WriteDialog;
+        EventBroker.WriteMessage += InitiateWriteMessage; 
+        EventBroker.DialogStarted += InitiateWriteDialog;
     }
 
     // Update is called once per frame
@@ -62,7 +64,8 @@ public class UIManager : MonoBehaviour
         EventBroker.PlayerHealthChanged -= HealthChanged;
         EventBroker.QuestStepActivated -= QuestActivated;
         EventBroker.QuestStepFulfilled -= QuestFulfilled;
-        EventBroker.WriteMessage -= WriteMessage;
+        EventBroker.WriteMessage -= InitiateWriteMessage;
+        EventBroker.DialogStarted -= InitiateWriteDialog;
     }
 
     void HealthChanged(int healthChange, bool isControllingChaser)
@@ -98,17 +101,30 @@ public class UIManager : MonoBehaviour
 
     void QuestFulfilled(QuestStep step, string message) => _objectiveText.SetText(message);
 
-    async void WriteMessage(string message)
+    void InitiateWriteMessage(string message, string leftParticipantName, string rightParticipantName)
+    {
+        if(_messageCoroutine != null) StopCoroutine(_messageCoroutine);
+        _messageCoroutine = StartCoroutine(WriteMessage(message, leftParticipantName, rightParticipantName));
+    }
+
+    IEnumerator WriteMessage(string message, string leftParticipantName, string rightParticipantName)
     {
         _speechBubble.SetActive(true);
         _rightParticipant.SetActive(false);
         _leftParticipant.SetActive(false);
+        _interactionText.transform.parent.gameObject.SetActive(false);
         _speechText.SetText(message);
-        await Task.Delay(5000);
+        yield return new WaitForSecondsRealtime(5);
         _speechBubble.SetActive(false);
     }
 
-    async void WriteDialog(List<Dialog> dialogs)
+    void InitiateWriteDialog(List<Dialog> dialogs)
+    {
+        if(_messageCoroutine != null) StopCoroutine(_messageCoroutine);
+        _messageCoroutine = StartCoroutine(WriteDialog(dialogs));
+    }
+
+    IEnumerator WriteDialog(List<Dialog> dialogs)
     {
         _speechBubble.SetActive(true);
         foreach (var dialog in dialogs)
@@ -116,12 +132,16 @@ public class UIManager : MonoBehaviour
             SetParticipantName(0, dialog.LeftParticipantName);
             SetParticipantName(1, dialog.RightParticipantName);
             _speechText.SetText(dialog.Text);
-            List<Task> tasks = new List<Task>(){Task.Delay(dialog.WaitTime)};
             if(dialog.AllowSkip)
             {
-                tasks.Add(AwaitForKey(_controls.PlayerActions.Interact));
+                _interactionText.transform.parent.gameObject.SetActive(true);
+                yield return new WaitUntilForRealtime(() => _controls.PlayerActions.Interact.WasPressedThisFrame(), dialog.WaitTime);
             }
-            await Task.WhenAny(tasks);
+            else
+            {
+                _interactionText.transform.parent.gameObject.SetActive(false);
+                yield return new WaitForSecondsRealtime(dialog.WaitTime);
+            }
             dialog.EndAction.Invoke();
         }
         _speechBubble.SetActive(false);

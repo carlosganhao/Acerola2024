@@ -13,6 +13,7 @@ public class ChasingChaserState : AbstractChaserState
     private Stack<Waypoint> _pathToPlayer;
     private Waypoint _previousTargetWaypoint;
     private Waypoint _targetWaypoint;
+    private bool _sawPlayer = false;
 
     public ChasingChaserState(ChaserController controller) : base(controller)
     {
@@ -35,6 +36,8 @@ public class ChasingChaserState : AbstractChaserState
         }
         else
         {
+            _sawPlayer = true;
+            controller.PlayReaction(ChaserController.ReactionType.reaction_found);
             controller._animator.SetBool("Moving", false);
             controller._animator.SetBool("Running", false);
             controller._animator.SetBool("Aiming", true);
@@ -46,6 +49,11 @@ public class ChasingChaserState : AbstractChaserState
     {
         if(MapController.Instance.IsPlayerVisible(controller.transform.position, controller.transform.forward))
         {
+            if(!_sawPlayer)
+            {
+                _sawPlayer = true;
+                controller.PlayReaction(ChaserController.ReactionType.reaction_found);
+            }
             controller._animator.SetBool("Moving", false);
             controller._animator.SetBool("Running", false);
             controller._animator.SetBool("Aiming", true);
@@ -89,7 +97,7 @@ public class ChasingChaserState : AbstractChaserState
 
     public override void ExitState()
     {
-
+        EventBroker.SoundTriggered -= SoundListener;
     }
 
     private void LookAtPlayer()
@@ -150,6 +158,7 @@ public class ChasingChaserState : AbstractChaserState
         }
         else
         {
+            controller.PlayReaction(ChaserController.ReactionType.reaction_searching);
             controller.SwitchToState(controller.PatrolingState);
         }
     }
