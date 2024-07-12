@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
         // Debug.Log("Took Damange");
 
         _health = Mathf.Max(0, _health - damage);
-        EventBroker.InvokePlayerHealthChanged(-damage, _isControllingChaser);
+        EventBroker.InvokePlayerHealthChanged(-damage, GetPercentHealth(), _isControllingChaser);
         if(_isControllingChaser)
         {
             _audioSource.PlayOneShot(_stabSound);
@@ -179,7 +179,12 @@ public class PlayerController : MonoBehaviour
     {
         // Debug.Log("Healed");
         _health = Mathf.Min(_maxHealth, _health + heal);
-        EventBroker.InvokePlayerHealthChanged(heal, _isControllingChaser);
+        EventBroker.InvokePlayerHealthChanged(heal, GetPercentHealth(), _isControllingChaser);
+    }
+
+    private float GetPercentHealth()
+    {
+        return _health/(float)_maxHealth;
     }
 
     private void Shoot(InputAction.CallbackContext context)

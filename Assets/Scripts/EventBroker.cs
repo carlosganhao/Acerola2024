@@ -30,12 +30,12 @@ public static class EventBroker
             DetachChaser();
     }
 
-    public static event Action<int, bool> PlayerHealthChanged;
+    public static event Action<int, float, bool> PlayerHealthChanged;
     
-    public static void InvokePlayerHealthChanged(int healthChange, bool isControllingChaser)
+    public static void InvokePlayerHealthChanged(int healthChange, float healthPercent, bool isControllingChaser)
     {
         if (PlayerHealthChanged != null)
-            PlayerHealthChanged(healthChange, isControllingChaser);
+            PlayerHealthChanged(healthChange, healthPercent, isControllingChaser);
     }
 
     public static event Action<QuestStep, string> QuestStepActivated;

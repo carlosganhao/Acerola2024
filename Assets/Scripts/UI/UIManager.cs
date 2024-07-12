@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     [SerializeField] private RawImage _gameView;
+    [SerializeField] private Animator _healthScreenAnimator;
     [SerializeField] private Transform _healthIndiciatorContainer;
     [SerializeField] private Image _screenCrackPrefab;
     [SerializeField] private List<Sprite> _crackList;
@@ -68,18 +69,11 @@ public class UIManager : MonoBehaviour
         EventBroker.DialogStarted -= InitiateWriteDialog;
     }
 
-    void HealthChanged(int healthChange, bool isControllingChaser)
+    void HealthChanged(int healthChange, float percentHealth, bool isControllingChaser)
     {
         if(isControllingChaser)
         {
-            if(healthChange < 0)
-            {
-
-            }   
-            else
-            {
-                
-            }
+            _healthScreenAnimator.SetFloat("healthPercentage", percentHealth);
         }
         else
         {
